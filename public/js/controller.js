@@ -11,7 +11,7 @@
 		$scope.sendToUser = function() {
 			console.log($scope.data);
 			
-			$http.post('http://localhost:3000', $scope.user)
+			$http.get('http://'+$scope.ip+'/?phone='+$scope.user.phone+'&message='+$scope.user.message)
 				.success(function(res) {
 					console.log(res.data);
 				})
@@ -19,7 +19,7 @@
 					console.log(err);
 				})
 
-			$http.post('http://localhost:3000', $scope.driver)
+			$http.get('http://'+$scope.ip+'/?phone='+$scope.driver.phone+'&message='+$scope.driver.message)
 				.success(function(res) {
 					console.log(res.data);
 				})
@@ -28,20 +28,9 @@
 				})
 		};
 
-		$scope.sendToDriver = function() {
-			console.log($scope.data);
-			$http.post('http://localhost:3000', $scope.user)
-				.success(function(res) {
-					console.log(res.data);
-				})
-				.error(function(err) {
-					console.log(err);
-				})
-		};
 		
-
 		$scope.getOtherFields = function(phone) {
-			$http.get('https://351c0d05.ngrok.io/users')
+			$http.get('http://localhost:4000/users')
 				.success(function(users) {
 					users.forEach(function(user) {
   						if (phone == user.phone) {
@@ -50,7 +39,7 @@
   						}
 					});
 
-					$http.get('https://351c0d05.ngrok.io/drivers')
+					$http.get('http://localhost:4000/drivers')
 						.success(function(drivers) {
 							$scope.drivers = drivers;
 							drivers.forEach(function(driver) {
@@ -70,8 +59,8 @@
 			$scope.drivers.forEach(function(driver) {
 				if($scope.driver.name == driver.name){
 					$scope.driver.phone = driver.phone;
-					$scope.user.message = "প্রিয় " + $scope.user.name + " যাত্রা শুরু " + $scope.source + " এবং শেষ " + $scope.destination + "\n চালক " + $scope.driver.name + " মোবাইল নম্বর " + $scope.driver.phone; 
-					$scope.driver.message = "ও "+$scope.driver.name +" ভাই !! আপনে "+ $scope.source + " তে "+ $scope.destination + " যান \n নাম: " + $scope.user.name + " নম্বর " + $scope.user.phone; 
+					$scope.user.message = "প্রিয় " + $scope.user.name+" সময় : "+$scope.user.time + " শুরু " + $scope.source + " এবং শেষ " + $scope.destination + "\n চালক " + $scope.driver.name + " মোবাইল নম্বর " + $scope.driver.phone; 
+					$scope.driver.message = $scope.driver.name +" ভাই !! আপনে "+ $scope.source + " তে "+ $scope.destination + " যান \n নাম: " + $scope.user.name + " নম্বর " + $scope.user.phone+ " সময় : "+$scope.user.time ; 
 				}
 			
 			})

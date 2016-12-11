@@ -21,6 +21,8 @@
         <!-- Page Content goes here -->
 
         <form id="the-form" class="form-control">
+            <input type="text" placeholder="time" name="time" ng-model="user.time"><br>
+             <input type="text" placeholder="ip" name="ip" ng-model="ip"><br>
             <input type="text" placeholder="Name" name="name" ng-model="user.name"><br>
             <input type="text" placeholder="Phone Number" name="phone" ng-model="user.phone" ng-blur="getOtherFields(user.phone)"><br>
 
